@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Poems, letters and quotes by Neln.">
+<title>Neln's Writings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Courier+Prime:wght@400;700&display=swap">
+<style>
+/* Layout: a single reading column, like a bound notebook. Tabs across the top, a table of contents, then the open piece. */
+:root{
+  --bg:#eef0f3;          /* cool stone paper */
+  --surface:#f8f9fb;
+  --ink:#1d2230;
+  --muted:#5d6577;
+  --rule:#cfd4de;
+  --accent:#8a5a14;      /* lamp brass, darker for light paper */
+  --accent-soft:#e9dcc4;
+  --display:"IM Fell English",Georgia,"Times New Roman",serif;
+  --display-sc:"IM Fell English SC",Georgia,serif;
+  --body:"Literata",Georgia,serif;
+  --mono:"Courier Prime","Courier New",Courier,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141824;--surface:#1b2030;--ink:#e6e3da;--muted:#9aa1b2;--rule:#2d3446;--accent:#d9a75a;--accent-soft:#33301f;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141824;--surface:#1b2030;--ink:#e6e3da;--muted:#9aa1b2;--rule:#2d3446;--accent:#d9a75a;--accent-soft:#33301f;color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:680px;margin:0 auto;padding-block:48px 72px;display:flex;flex-direction:column;gap:40px}
+
+header{display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-family:var(--display-sc);letter-spacing:.12em;color:var(--accent);font-size:15px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,11vw,72px);line-height:1;margin:0;text-wrap:balance}
+h1 em{color:var(--accent)}
+.about{margin:0;color:var(--muted);max-width:56ch}
+
+nav{display:flex;flex-wrap:wrap;gap:6px 18px;border-bottom:1px solid var(--rule);padding-bottom:10px}
+nav button{font:inherit;font-family:var(--display-sc);letter-spacing:.06em;font-size:17px;background:none;border:0;
+  color:var(--muted);padding:4px 0;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-11px}
+nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav button:hover{color:var(--ink)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.blurb{font-style:italic;color:var(--muted);margin:0}
+.toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.toc button{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-align:left;
+  font:inherit;background:none;border:0;border-bottom:1px dotted var(--rule);color:var(--ink);padding:12px 0;cursor:pointer}
+.toc button:hover .t,.toc button[aria-current="true"] .t{color:var(--accent)}
+.toc .t{font-family:var(--display);font-size:22px;min-width:0}
+.toc .d{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+article{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:32px clamp(18px,5vw,44px);display:flex;flex-direction:column;gap:18px;min-width:0}
+article h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,7vw,40px);line-height:1.1;margin:0;text-wrap:balance}
+.meta{font-family:var(--mono);font-size:13px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+.sample{background:var(--accent-soft);color:var(--ink);padding:1px 8px;border-radius:2px}
+.text{white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.verse .text{font-size:18px;line-height:1.75}
+.prose .text{white-space:normal}
+.prose p{margin:0 0 1em}
+.prose h3{font-family:var(--display-sc);font-weight:400;letter-spacing:.06em;color:var(--accent);font-size:19px;margin:1.2em 0 .3em}
+.script{font-family:var(--mono);font-size:15px;line-height:1.5;display:flex;flex-direction:column;gap:14px}
+.script .scene{font-weight:700;text-transform:uppercase}
+.script .line{display:flex;flex-direction:column;align-items:center;text-align:left}
+.script .who{text-transform:uppercase}
+.script .dir{color:var(--muted);font-style:italic}
+.script .say{max-width:36ch;align-self:center}
+.quotes{gap:0;padding-block:12px}
+.quotes figure{margin:0;padding:22px 0;border-bottom:1px dotted var(--rule);display:flex;flex-direction:column;gap:8px}
+.quotes figure:last-child{border-bottom:0}
+.quotes blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(22px,5.5vw,28px);line-height:1.3;text-wrap:balance}
+.quotes blockquote::before{content:"“";color:var(--accent)}
+.quotes blockquote::after{content:"”";color:var(--accent)}
+.quotes figcaption{font-family:var(--mono);font-size:13px;color:var(--muted)}
+footer{color:var(--muted);font-size:14px;border-top:1px solid var(--rule);padding-top:16px}
+@media (prefers-reduced-motion:no-preference){article{animation:rise .35s ease-out}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
+*{box-sizing:border-box}body{margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Poems · Letters · Quotes</div>
+    <h1>The writings of <em>Neln</em></h1>
+    <p class="about" id="about"></p>
+  </header>
+
+  <nav role="tablist" id="tabs" aria-label="Kinds of writing"></nav>
+  <p class="blurb" id="blurb"></p>
+  <ul class="toc" id="toc"></ul>
+  <article id="piece" aria-live="polite"></article>
+  <footer>All writing © Neln. Please ask before sharing.</footer>
+</div>
+
+<script>
+/* ============================================================
+   EDIT HERE. Your about text, then every piece of writing.
+   To add a piece, copy one { ... } block, paste it into the
+   right section, and change the title, date and text.
+   Delete "sample: true" from any piece that is really yours.
+   Scripts: lines starting with "INT." or "EXT." are scenes,
+   "NAME: words" is dialogue, "(words)" is direction.
+   ============================================================ */
+const ABOUT = "I drive a delivery route across Wyoming by day and dabble in writing by night: poems in an old voice, and letters to people I'll never meet.";
+
+const SECTIONS = [
+ { id:"poetry", name:"Poetry", style:"verse", blurb:"Poems, mostly in an older tongue.", pieces:[
+   { title:"The Grip", date:"August 7", text:
+`I held the pain like a keepsake,
+not because I loved it,
+but because I feared forgetting
+what it meant to feel.
+
+It was my proof—
+that I had lived,
+that I had loved,
+that something once mattered enough to break me.
+
+So I gripped it,
+tight enough to bleed,
+tight enough to carve its name into my bones
+so I wouldn’t lose the memory
+of what it meant to be whole.
+
+But pain isn’t the only proof.
+There’s strength in softness,
+truth in healing,
+and feeling doesn’t fade when the wound does.
+
+I can let go now—
+not because I’m forgetting,
+but because I’m remembering
+how to feel without bleeding.` },
+   { title:"Untitled", date:"June 30", text:
+`If I loved you till I was numb, would you stay?
+If I was foolish and drank to numb the numb, would you love me?
+If we were never meant to be, why was there love that could never be?
+If I were a spirit, would you be intoxicated with my essence?
+If I were the moon and you were the sun, would we dance among the stars?
+If we grew apart, would we still face each other like the flowers of sun?
+Would we be gifted together and watch another's love bloom, would our love blossom in the shadow of others?` },
+   { title:"Reaper of Grim", date:"", text:
+`They call me the reaper of grim
+I steal their souls
+leaving behind shadows and sorrows
+I shatter the time
+and watch them cry
+I shift my form as the laughter of the void
+they stare in despair
+I reside in their light
+that I hope to consume
+as they're thrust into the void
+with no hope or will
+I watch them shrivel
+I take pleasure in stealing their pride
+I am the darkness that resides inside` },
+   { title:"Poets of the Dark", date:"", text:
+`We are the poets of the dark
+we live on the darkside
+we watch from the shadows
+we are the sorrows that reside
+we use the void as our ink
+we are never blind to the horrors
+we use words to cope
+words flow within us
+like a forgotten river of the forgotten isles
+we see the unheard
+we are the unseen
+we are the forgettable
+we are nothing
+but we are everything` },
+   { title:"The Thief", date:"", text:
+`I am a thief.
+I steal and steal.
+I rob them of their emotions,
+their life,
+their living turmoil—
+a past not to be forgotten.
+
+The bringer of misfortune,
+and I are one and the same.
+We take and take,
+but it is never enough.
+
+We are the friends of death,
+the gods of chaos.
+Unpredictable.
+Unenviable.` },
+   { title:"The Weak and Weary", date:"", text:
+`The weak and weary stand
+face the grim and gory
+the undaunting shadowy truths
+consume their shifting souls
+thy screams of horror and agony
+fills the void
+'tis their pleas of safety and sanctuary
+that are null and void
+none escape from the grasp of fate
+their paralysis journey
+leaves many more weak and weary` },
+   { title:"Shadow Stories", date:"", text:
+`Every person has a shadow
+and every shadow has its stories
+we are connected during the day
+and the shadows are connected at night
+when every demon comes out
+to tell their horrifying stories
+we hide inside the light
+to drown out the shadowy whispers of horror
+the shadows` },
+   { title:"Thy Chosen", date:"", text:
+`Never here never there
+they'll never hear what's beyond
+wonders and ponders the truths within
+shadows and sorrows surrounds your existence
+while you are persistent
+defying gods and demons
+whims and wills
+visions of misfortune
+you strive and survive against all odds
+for thy shall be victorious and undefeated
+stand with pride
+for you're thy chosen
+none shall cry in your presence` },
+   { title:"Destined Apart", date:"", text:
+`Falling leaves change to falling flakes
+the sun and moon danced among the cosmos
+for decades together
+but always destined apart
+nights dark and dreary
+days bright and sunny` },
+   { title:"The Shadowy Maze", date:"", text:
+`Corrupted and tortured soul,
+Tormented by past suppressed trauma,
+Left broken and alone, filled with rage,
+Fighting the mental anguish,
+Losing against the feeling in the brain.
+Battling urges within distorted perception,
+Voices and demons surround like the blackest of night,
+With no hope in sight, with no reason to cry, I slowly die.
+I mourn the death of my happiness and sense of direction.
+Alone and lost, I stand with no purpose.
+I wander, watching many dark moons pass,
+Unable to find an escape from the shadowy maze.
+I find myself turned around and confused,
+With no end in sight, nothing feels right.` },
+   { title:"My First Poem", date:"2019", text:
+`Roses are red
+violets are blue
+some poems have gone unheard,
+some have gone unwritten,
+but nobody will know what they have been
+since they've gone unknown,
+many have been erased because of resistance
+they are the vain of my existence` } ]},
+ { id:"letters", name:"Letters for Strangers", style:"prose", blurb:"The Collection of Letters for Strangers. Written to whoever needs them.", pieces:[
+   { title:"Letter to the Stranger Who Needs to Hear This", date:"", text:
+`Stranger,
+
+You are beautiful in the highest of highs and the lowest of lows.
+
+And when it feels like everything is for naught, listen closely for the quiet, harmonious tones of love and support around you. They may be faint, but if you follow them, they will guide you back to where you need to be.
+
+Explore the world like sailors of old. Sail the seven seas, wander far, see the wonders of the world, and pause to appreciate life's simple beauties. It is often in the smallest moments that inner peace is found.
+
+May you find your way again.
+
+— A stranger rooting for you` } ]},
+ { id:"quotes", name:"Quotes", style:"quotes", blurb:"Lines worth keeping.", pieces:[
+   { text:"Perception often lacks perspective, thus we are blind to the truth of our everyday life, living in our own little illusions, never seeing the bigger picture of it all.", by:"Neln", date:"2024-12-09" },
+   { text:"Perception is a powerful and misleading thing. We believe what we see, and we see what we believe, but what we see isn't always wrong, and what we believe isn't always right, which can distort and cloud our judgment. But time and time again, we right our wrongs and wrong our rights.", by:"Neln" },
+   { text:"To dive deep in it all is to open your mind and eyes and perceive the truths of each and every illusionary sight and emotion. Study every bend and ripple of reality. See the truth in every shape, way, and form. Embrace the dark and terror-inducing sides of society.", by:"Neln" },
+   { text:"Our social construct is so full of lies and illusions, we may never see the objective truth of reality, never fully understanding anything or anyone. That is what we struggle with as a society. We live in our own illusions, perceiving with our past, distorting our perception of the future, never truly solving anything. We must change together.", by:"Neln" },
+   /* Add quotes like this. "by" and "date" are optional:
+   { text:"The quote goes here.", by:"Who said it", date:"2026-10-15" }, */
+ ]},
+];
+/* ===================== end of editing ===================== */
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = d => { const t = new Date(d + "T12:00:00"); return isNaN(t) ? d : t.toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}); };
+let cur = SECTIONS[0], pieceIdx = 0;
+
+function body(sec, p){
+  if (sec.style === "script"){
+    return '<div class="script">' + p.text.split("\n").filter(l=>l.trim()).map(l=>{
+      l = l.trim();
+      if (/^(INT\.|EXT\.)/i.test(l)) return `<div class="scene">${esc(l)}</div>`;
+      if (/^\(.*\)$/.test(l)) return `<div class="dir">${esc(l)}</div>`;
+      const m = l.match(/^([^:]{1,30}):\s*(\(.*?\))?\s*(.*)$/);
+      if (m) return `<div class="line"><span class="who">${esc(m[1])}</span>${m[2]?`<span class="dir">${esc(m[2])}</span>`:""}<span class="say">${esc(m[3])}</span></div>`;
+      return `<div>${esc(l)}</div>`;
+    }).join("") + '</div>';
+  }
+  if (sec.style === "prose"){
+    return '<div class="text">' + p.text.split(/\n\s*\n/).map(b=>{
+      return b.split("\n").map(l => l.startsWith("## ") ? `<h3>${esc(l.slice(3))}</h3>` : (l.trim()?`<p>${esc(l)}</p>`:"")).join("");
+    }).join("") + '</div>';
+  }
+  return `<p class="text">${esc(p.text)}</p>`;
+}
+
+function show(i){
+  pieceIdx = i;
+  const p = cur.pieces[i], a = $("piece");
+  a.className = cur.style;
+  if (!p){ a.innerHTML = `<p class="blurb">Nothing here yet.</p>`; return; }
+  a.innerHTML = `<h2>${esc(p.title)}</h2><div class="meta"><span>${fmt(p.date)}</span><span>${esc(cur.name)}</span>${p.sample?'<span class="sample">Sample, replace with your own</span>':""}</div>${body(cur,p)}`;
+  a.style.animation = "none"; a.offsetHeight; a.style.animation = "";
+  [...$("toc").querySelectorAll("button")].forEach((b,j)=>b.setAttribute("aria-current", j===i));
+}
+
+function open(sec){
+  cur = sec;
+  [...$("tabs").children].forEach(b=>b.setAttribute("aria-selected", b.dataset.id===sec.id));
+  $("blurb").textContent = sec.blurb;
+  if (sec.style === "quotes"){
+    $("toc").innerHTML = ""; $("toc").hidden = true;
+    const a = $("piece"); a.className = "quotes";
+    a.innerHTML = sec.pieces.length
+      ? sec.pieces.map(q=>`<figure><blockquote>${esc(q.text)}</blockquote>${(q.by||q.date)?`<figcaption>${q.by?"— "+esc(q.by):""}${q.by&&q.date?" · ":""}${q.date?fmt(q.date):""}</figcaption>`:""}</figure>`).join("")
+      : `<p class="blurb">No quotes yet. Send me the lines you want here and I'll add them.</p>`;
+    try{ history.replaceState(null,"","#"+sec.id); }catch(e){}
+    return;
+  }
+  $("toc").hidden = false;
+  const sorted = sec.pieces.map((p,i)=>({p,i})).sort((a,b)=>b.p.date.localeCompare(a.p.date));
+  sec.pieces = sorted.map(x=>x.p);
+  $("toc").innerHTML = sec.pieces.map((p,i)=>`<li><button type="button" data-i="${i}"><span class="t">${esc(p.title)}</span><span class="d">${fmt(p.date)}</span></button></li>`).join("");
+  show(0);
+  try{ history.replaceState(null,"","#"+sec.id); }catch(e){}
+}
+
+$("about").textContent = ABOUT;
+$("tabs").innerHTML = SECTIONS.map(s=>`<button type="button" role="tab" id="tab-${s.id}" data-id="${s.id}">${esc(s.name)}</button>`).join("");
+$("tabs").addEventListener("click", e=>{ const b=e.target.closest("button"); if(b) open(SECTIONS.find(s=>s.id===b.dataset.id)); });
+$("toc").addEventListener("click", e=>{ const b=e.target.closest("button"); if(b){ show(+b.dataset.i); $("piece").scrollIntoView({behavior:"smooth",block:"start"}); } });
+open(SECTIONS.find(s=>"#"+s.id===location.hash) || SECTIONS[0]);
+</script>
+</body>
+</html>
